@@ -4,5 +4,7 @@
 		"module": "commonjs",
 		"outDir": "./dist",
 		"esModuleInterop": true
-	}
+	},
+	"include": ["./"],
+	"exclude": ["./client"]
 }
