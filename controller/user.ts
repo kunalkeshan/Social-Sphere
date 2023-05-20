@@ -8,7 +8,13 @@ import User from '../models/user';
 import { uuid } from 'uuidv4';
 import bcrypt from 'bcryptjs';
 import { ApiError } from '../utils/apiError';
-import { UserIsUniqueSchema, NewUserAccountSchema } from '../schema/user';
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from '../config';
+import {
+	UserIsUniqueSchema,
+	NewUserAccountSchema,
+	LoginUserSchema,
+} from '../schema/user';
 
 export const userIsUniqueController = async (data: UserIsUniqueSchema) => {
 	const query = { [data.query.key]: data.query.value };
@@ -22,7 +28,6 @@ export const newUserAccountController = async (data: NewUserAccountSchema) => {
 	const count = await collections.users.countDocuments({
 		$or: [{ email: data.body.email, username: data.body.username }],
 	});
-	console.log(count);
 	if (count !== 0)
 		throw new ApiError({
 			statusCode: 409,
@@ -43,11 +48,43 @@ export const newUserAccountController = async (data: NewUserAccountSchema) => {
 		delete user.password;
 		delete user.id;
 		delete user._id;
-		return { user };
+		const token = jwt.sign({ publicId: user.publicId }, JWT_SECRET, {
+			expiresIn: '365d',
+		});
+		return { user, token };
 	} else {
 		throw new ApiError({
 			statusCode: 500,
 			message: 'user/unable-to-create-new-user',
+		});
+	}
+};
+
+export const loginUserController = async (data: LoginUserSchema) => {
+	const user = (await collections.users.findOne({
+		username: data.body.username,
+	})) as User;
+	if (!user)
+		throw new ApiError({
+			statusCode: 404,
+			message: 'user/account-does-not-exists',
+		});
+	const isValidPassword = await bcrypt.compare(
+		data.body.password,
+		user.password
+	);
+	if (isValidPassword) {
+		delete user.password;
+		delete user.id;
+		delete user._id;
+		const token = jwt.sign({ publicId: user.publicId }, JWT_SECRET, {
+			expiresIn: '365d',
+		});
+		return { user, token };
+	} else {
+		throw new ApiError({
+			statusCode: 401,
+			message: 'user/incorrect-password',
 		});
 	}
 };

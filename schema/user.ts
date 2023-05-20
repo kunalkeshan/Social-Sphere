@@ -24,3 +24,12 @@ export const newUserAccountSchema = z.object({
 });
 
 export type NewUserAccountSchema = z.infer<typeof newUserAccountSchema>;
+
+export const loginUserSchema = z.object({
+	body: z.object({
+		username: z.string(),
+		password: z.string(),
+	}),
+});
+
+export type LoginUserSchema = z.infer<typeof loginUserSchema>;
