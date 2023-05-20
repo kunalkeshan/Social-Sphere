@@ -8,6 +8,9 @@ export default class User {
 		public username: string,
 		public email: string,
 		public password: string,
-		public id?: ObjectId
+		public avatar: string,
+		public publicId: string,
+		public id?: ObjectId,
+		public _id?: ObjectId
 	) {}
 }

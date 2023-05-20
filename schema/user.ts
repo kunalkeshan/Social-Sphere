@@ -11,3 +11,16 @@ export const userIsUniqueSchema = z.object({
 		value: z.string(),
 	}),
 });
+
+export type UserIsUniqueSchema = z.infer<typeof userIsUniqueSchema>;
+
+export const newUserAccountSchema = z.object({
+	body: z.object({
+		fullName: z.string(),
+		email: z.string().email(),
+		username: z.string(),
+		password: z.string(),
+	}),
+});
+
+export type NewUserAccountSchema = z.infer<typeof newUserAccountSchema>;

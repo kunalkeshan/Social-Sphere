@@ -15,3 +15,5 @@ export const MONGODB = {
 	DB_NAME: process.env.DB_NAME,
 	USERS_COLLECTION_NAME: process.env.USERS_COLLECTION_NAME,
 };
+
+export const JWT_SECRET = process.env.JWT_SECRET;
