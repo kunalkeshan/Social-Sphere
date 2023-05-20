@@ -4,19 +4,22 @@
 
 // Dependencies
 import express, { NextFunction, Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import { zParse } from '../utils/zParse';
 import {
 	loginUserSchema,
 	newUserAccountSchema,
 	userIsUniqueSchema,
+	userProfileBioSchema,
+	userProfileTitleSchema,
 } from '../schema/user';
 import {
 	loginUserController,
 	newUserAccountController,
 	userIsUniqueController,
+	userProfileBioController,
+	userProfileTitleController,
 } from '../controller/user';
-import { JWT_SECRET } from '../config';
+import { auth } from '../middleware/auth';
 const Router = express.Router();
 
 Router.post(
@@ -51,6 +54,34 @@ Router.post(
 			const data = await zParse(loginUserSchema, req);
 			const { user, token } = await loginUserController(data);
 			return res.json({ user, token, message: 'user/login-successful' });
+		} catch (error) {
+			return next(error);
+		}
+	}
+);
+
+Router.post(
+	'/profile/title',
+	auth,
+	async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const data = await zParse(userProfileTitleSchema, req);
+			await userProfileTitleController(data, res.locals.user);
+			return res.json({ message: 'user/title-updated' });
+		} catch (error) {
+			return next(error);
+		}
+	}
+);
+
+Router.post(
+	'/profile/bio',
+	auth,
+	async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const data = await zParse(userProfileBioSchema, req);
+			await userProfileBioController(data, res.locals.user);
+			return res.json({ message: 'user/bio-updated' });
 		} catch (error) {
 			return next(error);
 		}
