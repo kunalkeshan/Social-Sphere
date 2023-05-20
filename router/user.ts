@@ -30,10 +30,7 @@ Router.post(
 Router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const data = await zParse(newUserAccountSchema, req);
-		const { user } = await newUserAccountController(data);
-		const token = jwt.sign({ publicId: user.publicId }, JWT_SECRET, {
-			expiresIn: '365d',
-		});
+		const { user, token } = await newUserAccountController(data);
 		return res.json({ user, token });
 	} catch (error) {
 		return next(error);

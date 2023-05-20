@@ -9,6 +9,8 @@ import { uuid } from 'uuidv4';
 import bcrypt from 'bcryptjs';
 import { ApiError } from '../utils/apiError';
 import { UserIsUniqueSchema, NewUserAccountSchema } from '../schema/user';
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from '../config';
 
 export const userIsUniqueController = async (data: UserIsUniqueSchema) => {
 	const query = { [data.query.key]: data.query.value };
@@ -43,7 +45,10 @@ export const newUserAccountController = async (data: NewUserAccountSchema) => {
 		delete user.password;
 		delete user.id;
 		delete user._id;
-		return { user };
+		const token = jwt.sign({ publicId: user.publicId }, JWT_SECRET, {
+			expiresIn: '365d',
+		});
+		return { user, token };
 	} else {
 		throw new ApiError({
 			statusCode: 500,
