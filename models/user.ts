@@ -10,6 +10,8 @@ export default class User {
 		public password: string,
 		public avatar: string,
 		public publicId: string,
+		public title?: string,
+		public bio?: string,
 		public id?: ObjectId,
 		public _id?: ObjectId
 	) {}

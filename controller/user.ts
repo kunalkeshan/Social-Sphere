@@ -14,6 +14,8 @@ import {
 	UserIsUniqueSchema,
 	NewUserAccountSchema,
 	LoginUserSchema,
+	UserProfileTitleSchema,
+	UserProfileBioSchema,
 } from '../schema/user';
 
 export const userIsUniqueController = async (data: UserIsUniqueSchema) => {
@@ -85,6 +87,44 @@ export const loginUserController = async (data: LoginUserSchema) => {
 		throw new ApiError({
 			statusCode: 401,
 			message: 'user/incorrect-password',
+		});
+	}
+};
+
+export const userProfileTitleController = async (
+	data: UserProfileTitleSchema,
+	user: User
+) => {
+	const response = await collections.users.updateOne(
+		{ publicId: user.publicId },
+		{ $set: { title: data.body.title } },
+		{ upsert: true }
+	);
+	if (response) {
+		return Promise.resolve();
+	} else {
+		throw new ApiError({
+			message: 'user/unable-to-update-title',
+			statusCode: 500,
+		});
+	}
+};
+
+export const userProfileBioController = async (
+	data: UserProfileBioSchema,
+	user: User
+) => {
+	const response = await collections.users.updateOne(
+		{ publicId: user.publicId },
+		{ $set: { bio: data.body.bio } },
+		{ upsert: true }
+	);
+	if (response) {
+		return Promise.resolve();
+	} else {
+		throw new ApiError({
+			message: 'user/unable-to-update-bio',
+			statusCode: 500,
 		});
 	}
 };

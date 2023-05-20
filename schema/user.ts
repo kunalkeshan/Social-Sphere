@@ -33,3 +33,19 @@ export const loginUserSchema = z.object({
 });
 
 export type LoginUserSchema = z.infer<typeof loginUserSchema>;
+
+export const userProfileTitleSchema = z.object({
+	body: z.object({
+		title: z.string().max(30),
+	}),
+});
+
+export type UserProfileTitleSchema = z.infer<typeof userProfileTitleSchema>;
+
+export const userProfileBioSchema = z.object({
+	body: z.object({
+		bio: z.string().max(80),
+	}),
+});
+
+export type UserProfileBioSchema = z.infer<typeof userProfileBioSchema>;
