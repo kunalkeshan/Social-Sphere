@@ -9,12 +9,14 @@ import {
 	loginUserSchema,
 	newUserAccountSchema,
 	userIsUniqueSchema,
+	userProfileBioSchema,
 	userProfileTitleSchema,
 } from '../schema/user';
 import {
 	loginUserController,
 	newUserAccountController,
 	userIsUniqueController,
+	userProfileBioController,
 	userProfileTitleController,
 } from '../controller/user';
 import { auth } from '../middleware/auth';
@@ -66,6 +68,20 @@ Router.post(
 			const data = await zParse(userProfileTitleSchema, req);
 			await userProfileTitleController(data, res.locals.user);
 			return res.json({ message: 'user/title-updated' });
+		} catch (error) {
+			return next(error);
+		}
+	}
+);
+
+Router.post(
+	'/profile/bio',
+	auth,
+	async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const data = await zParse(userProfileBioSchema, req);
+			await userProfileBioController(data, res.locals.user);
+			return res.json({ message: 'user/bio-updated' });
 		} catch (error) {
 			return next(error);
 		}
