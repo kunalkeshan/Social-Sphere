@@ -4,23 +4,27 @@
 
 // Dependencies
 import express from 'express';
-import logger from 'morgan';
+import logger from './middleware/morgan';
 import path from 'path';
 import { IS_PRODUCTION, PORT } from './config';
 import { connectToDatabase } from './services/database';
 import errorHandler from './middleware/errorHandler';
 import { ApiError } from './utils/apiError';
+import appRouter from './router';
 
 // Initializing Ap
 const app = express();
 
 // Setting up Middleware
-app.use(logger(IS_PRODUCTION ? 'combined' : 'dev'));
+app.use(logger);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 // Health Check Endpoint
 app.get('/ping', (req, res) => res.send('pong'));
+
+// Application Router
+app.use(appRouter);
 
 // Handle 404 Error
 app.use((req, res, next) => {
