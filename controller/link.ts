@@ -6,7 +6,11 @@
 import { ObjectId } from 'mongodb';
 import Link from '../models/link';
 import User from '../models/user';
-import { CreateLinkSchema, EditLinkSchema } from '../schema/link';
+import {
+	CreateLinkSchema,
+	DeleteLinkSchema,
+	EditLinkSchema,
+} from '../schema/link';
 import { collections } from '../services/database';
 import { ApiError } from '../utils/apiError';
 
@@ -53,6 +57,28 @@ export const editLinkController = async (data: EditLinkSchema) => {
 	} else {
 		throw new ApiError({
 			message: 'user/unable-to-update-link',
+			statusCode: 500,
+		});
+	}
+};
+
+export const deleteLinkController = async (data: DeleteLinkSchema) => {
+	const count = await collections.links.countDocuments({
+		_id: new ObjectId(data.body.id),
+	});
+	if (count === 0)
+		throw new ApiError({
+			message: 'link/link-does-not-exist',
+			statusCode: 404,
+		});
+	const response = await collections.links.deleteOne({
+		_id: new ObjectId(data.body.id),
+	});
+	if (response) {
+		return Promise.resolve();
+	} else {
+		throw new ApiError({
+			message: 'user/unable-to-delete-link',
 			statusCode: 500,
 		});
 	}

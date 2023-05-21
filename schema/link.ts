@@ -34,3 +34,13 @@ export const editLinkSchema = z.object({
 });
 
 export type EditLinkSchema = z.infer<typeof editLinkSchema>;
+
+export const deleteLinkSchema = z.object({
+	body: z.object({
+		id: z.string().refine((val) => {
+			return ObjectId.isValid(val);
+		}),
+	}),
+});
+
+export type DeleteLinkSchema = z.infer<typeof deleteLinkSchema>;
