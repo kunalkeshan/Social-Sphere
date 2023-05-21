@@ -3,7 +3,10 @@ import * as mongoDB from 'mongodb';
 import { MONGODB } from '../config';
 
 // Global Variables
-export const collections: { users?: mongoDB.Collection } = {};
+export const collections: {
+	users?: mongoDB.Collection;
+	links?: mongoDB.Collection;
+} = {};
 
 // Initialize Connection
 export async function connectToDatabase() {
@@ -16,8 +19,12 @@ export async function connectToDatabase() {
 	const usersCollection: mongoDB.Collection = db.collection(
 		MONGODB.USERS_COLLECTION_NAME
 	);
+	const linksCollection: mongoDB.Collection = db.collection(
+		MONGODB.LINKS_COLLECTION_NAME
+	);
 
 	collections.users = usersCollection;
+	collections.links = linksCollection;
 
 	console.log(`Successfully connected to database: ${db.databaseName}.`);
 }
