@@ -3,7 +3,7 @@
  */
 
 // Dependencies
-import Link from '../models/Link';
+import Link from '../models/link';
 import User from '../models/user';
 import { CreateLinkSchema } from '../schema/link';
 import { collections } from '../services/database';
