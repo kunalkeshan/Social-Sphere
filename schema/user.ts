@@ -49,3 +49,20 @@ export const userProfileBioSchema = z.object({
 });
 
 export type UserProfileBioSchema = z.infer<typeof userProfileBioSchema>;
+
+export const userSocialsSchema = z.object({
+	body: z.object({
+		key: z.union([
+			z.literal('instagram'),
+			z.literal('linkedin'),
+			z.literal('twitter'),
+			z.literal('website'),
+			z.literal('youtube'),
+			z.literal('facebook'),
+			z.literal('email'),
+		]),
+		value: z.string().trim().url(),
+	}),
+});
+
+export type UserSocialsSchema = z.infer<typeof userSocialsSchema>;
