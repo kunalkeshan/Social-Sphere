@@ -9,6 +9,13 @@ import { CreateLinkSchema } from '../schema/link';
 import { collections } from '../services/database';
 import { ApiError } from '../utils/apiError';
 
+export const fetchUserLinksController = async (user: User) => {
+	const links = (await collections.links
+		.find({ userId: user.publicId })
+		.toArray()) as Link[];
+	return { links };
+};
+
 export const createLinkController = async (
 	data: CreateLinkSchema,
 	user: User
