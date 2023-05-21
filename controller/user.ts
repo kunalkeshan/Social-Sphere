@@ -16,6 +16,7 @@ import {
 	LoginUserSchema,
 	UserProfileTitleSchema,
 	UserProfileBioSchema,
+	UserSocialsSchema,
 } from '../schema/user';
 
 export const userIsUniqueController = async (data: UserIsUniqueSchema) => {
@@ -124,6 +125,25 @@ export const userProfileBioController = async (
 	} else {
 		throw new ApiError({
 			message: 'user/unable-to-update-bio',
+			statusCode: 500,
+		});
+	}
+};
+
+export const userSocialsController = async (
+	data: UserSocialsSchema,
+	user: User
+) => {
+	const response = await collections.users.updateOne(
+		{ publicId: user.publicId },
+		{ $set: { [`socials.${data.body.key}`]: data.body.value } },
+		{ upsert: true }
+	);
+	if (response) {
+		return Promise.resolve();
+	} else {
+		throw new ApiError({
+			message: `user/unable-to-update-social}`,
 			statusCode: 500,
 		});
 	}

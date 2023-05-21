@@ -11,6 +11,7 @@ import {
 	userIsUniqueSchema,
 	userProfileBioSchema,
 	userProfileTitleSchema,
+	userSocialsSchema,
 } from '../schema/user';
 import {
 	loginUserController,
@@ -18,6 +19,7 @@ import {
 	userIsUniqueController,
 	userProfileBioController,
 	userProfileTitleController,
+	userSocialsController,
 } from '../controller/user';
 import { auth } from '../middleware/auth';
 const Router = express.Router();
@@ -82,6 +84,20 @@ Router.post(
 			const data = await zParse(userProfileBioSchema, req);
 			await userProfileBioController(data, res.locals.user);
 			return res.json({ message: 'user/bio-updated' });
+		} catch (error) {
+			return next(error);
+		}
+	}
+);
+
+Router.post(
+	'/profile/socials',
+	auth,
+	async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const data = await zParse(userSocialsSchema, req);
+			await userSocialsController(data, res.locals.user);
+			return res.json({ message: 'user/socials-updated' });
 		} catch (error) {
 			return next(error);
 		}
