@@ -5,10 +5,11 @@
 // Dependencies
 import express, { NextFunction, Request, Response } from 'express';
 import { auth } from '../middleware/auth';
-import { createLinkSchema } from '../schema/link';
+import { createLinkSchema, editLinkSchema } from '../schema/link';
 import { zParse } from '../utils/zParse';
 import {
 	createLinkController,
+	editLinkController,
 	fetchUserLinksController,
 } from '../controller/link';
 const Router = express.Router();
@@ -36,6 +37,20 @@ Router.post(
 			return res
 				.status(201)
 				.json({ link, message: 'link/new-link-created' });
+		} catch (error) {
+			return next(error);
+		}
+	}
+);
+
+Router.put(
+	'/',
+	auth,
+	async (req: Request, res: Response, next: NextFunction) => {
+		try {
+			const data = await zParse(editLinkSchema, req);
+			await editLinkController(data);
+			return res.json({ message: 'link/link-updated' });
 		} catch (error) {
 			return next(error);
 		}
