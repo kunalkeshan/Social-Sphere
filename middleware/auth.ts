@@ -27,11 +27,9 @@ export const auth: RequestHandler = async (req, res, next) => {
 			req.headers.authorization?.split(' ') || [];
 		if (!token) throw new ApiError(UNAUTHORIZED);
 		const decoded = jwt.verify(token, JWT_SECRET) as UserAuthDecoded;
-		console.log(decoded);
 		const user = (await collections.users.findOne({
 			publicId: decoded.publicId,
 		})) as User;
-		console.log(user);
 		if (!user) throw new ApiError(UNAUTHORIZED);
 		res.locals.user = user;
 		res.locals.auth = { name, token };
