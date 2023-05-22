@@ -27,7 +27,7 @@ const Login = () => {
 						t.palette.mode === 'light'
 							? t.palette.grey[50]
 							: t.palette.grey[900],
-					backgroundSize: 'contain',
+					backgroundSize: '60% 60%',
 					backgroundPosition: 'center',
 				}}
 			/>
