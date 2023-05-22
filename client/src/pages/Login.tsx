@@ -60,7 +60,7 @@ const Login = () => {
 							margin='normal'
 							required
 							fullWidth
-							label='Email Address'
+							label='Username'
 							autoComplete='username'
 							type='text'
 							autoFocus
