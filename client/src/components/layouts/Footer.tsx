@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
 	return (
-		<Box className='w-full' component={'footer'}>
+		<Box className='w-full my-6' component={'footer'}>
 			<Box
 				component={'p'}
 				sx={{ maxWidth: 'xl' }}
