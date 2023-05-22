@@ -7,17 +7,25 @@ const Navbar = () => {
 			<AppBar position='static' className='!bg-primary'>
 				<Toolbar
 					sx={{ maxWidth: 'xl' }}
-					className='w-full flex justify-between mx-auto'
+					className='w-full flex justify-between mx-auto py-6'
 				>
 					<Typography
-						variant='h6'
 						component='a'
 						href='/'
-						sx={{ flexGrow: 1, fontFamily: 'Syne' }}
+						sx={{
+							flexGrow: 1,
+							fontFamily: 'Syne',
+							fontSize: '2rem',
+						}}
 					>
 						Social Sphere
 					</Typography>
-					<Link to={'/login'}>Login / Signup</Link>
+					<Link
+						to={'/login'}
+						className='px-8 py-4 border-2 border-white font-heading w-fit font-semibold hover:bg-white hover:text-primary transition-all'
+					>
+						Login / Signup
+					</Link>
 				</Toolbar>
 			</AppBar>
 		</Box>
