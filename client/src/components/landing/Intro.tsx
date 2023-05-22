@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Intro = () => {
 	return (
-		<section className='max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 mt-8 md:mt-16'>
+		<section className='max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 mt-8 md:mt-16 gap-12'>
 			<div className='flex flex-col gap-8 items-center text-center md:items-start md:text-left'>
 				<h1 className='font-heading text-3xl md:text-5xl'>
 					Share social media and personalized links on your own page.
@@ -19,7 +19,7 @@ const Intro = () => {
 					Get started
 				</Link>
 			</div>
-			<div className='flex items-center justify-center mt-12 md:mt-0'>
+			<div className='flex items-center justify-center'>
 				<div className='max-w-xl'>
 					<img
 						src='/landing-intro.svg'
