@@ -39,6 +39,8 @@ const Login = () => {
 				component={Paper}
 				elevation={6}
 				square
+				sx={{ background: '#2A2A2A', fontFamily: 'Inter' }}
+				className='!text-white'
 			>
 				<Box
 					sx={{
@@ -52,9 +54,9 @@ const Login = () => {
 					<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
 						<LockOutlinedIcon />
 					</Avatar>
-					<Typography component='h1' variant='h5'>
+					<h1 className='font-heading text-3xl md:text-5xl font-semibold'>
 						Log in
-					</Typography>
+					</h1>
 					<Box component='form' noValidate sx={{ mt: 1 }}>
 						<TextField
 							margin='normal'
@@ -64,6 +66,10 @@ const Login = () => {
 							autoComplete='username'
 							type='text'
 							autoFocus
+							sx={{
+								color: 'white',
+								'*': { color: 'inherit', borderColor: 'white' },
+							}}
 						/>
 						<TextField
 							margin='normal'
@@ -72,28 +78,30 @@ const Login = () => {
 							label='Password'
 							type='password'
 							autoComplete='current-password'
+							sx={{
+								color: 'white',
+								'*': { color: 'inherit', borderColor: 'white' },
+							}}
 						/>
-						<Button
+						<button
 							type='submit'
-							fullWidth
-							variant='contained'
-							sx={{ mt: 3, mb: 2 }}
+							className='px-4 my-4 w-full py-2 border-2 border-white font-heading font-semibold hover:bg-white hover:text-primary transition-all'
 						>
 							Sign In
-						</Button>
+						</button>
 						<Grid container>
 							<Grid item xs>
 								<Link
-									to='#'
-									className='underline underline-offset-2'
+									to='/forgot-password'
+									className='underline underline-offset-2 text-gray-500 hover:text-white transition-all'
 								>
 									Forgot password?
 								</Link>
 							</Grid>
 							<Grid item>
 								<Link
-									to='#'
-									className='underline underline-offset-2'
+									to='/signup'
+									className='underline underline-offset-2 text-gray-500 hover:text-white transition-all'
 								>
 									{"Don't have an account? Sign Up"}
 								</Link>
