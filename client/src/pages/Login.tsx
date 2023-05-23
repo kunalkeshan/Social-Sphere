@@ -3,9 +3,7 @@ import {
 	CssBaseline,
 	Box,
 	Avatar,
-	Typography,
 	TextField,
-	Button,
 	Paper,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -85,9 +83,9 @@ const Login = () => {
 						/>
 						<button
 							type='submit'
-							className='px-4 my-4 w-full py-2 border-2 border-white font-heading font-semibold hover:bg-white hover:text-primary transition-all'
+							className='px-4 text-white my-4 w-full py-2 border-2 border-white font-heading font-semibold hover:bg-white hover:text-primary transition-all'
 						>
-							Sign In
+							Log in
 						</button>
 						<Grid container>
 							<Grid item xs>
