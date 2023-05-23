@@ -3,9 +3,7 @@ import {
 	CssBaseline,
 	Box,
 	Avatar,
-	Typography,
 	TextField,
-	Button,
 	Paper,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -39,6 +37,8 @@ const Signup = () => {
 				component={Paper}
 				elevation={6}
 				square
+				sx={{ fontFamily: 'Inter', background: '#2A2A2A' }}
+				className='!text-white'
 			>
 				<Box
 					sx={{
@@ -52,9 +52,9 @@ const Signup = () => {
 					<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
 						<LockOutlinedIcon />
 					</Avatar>
-					<Typography component='h1' variant='h5'>
+					<h1 className='font-heading text-3xl md:text-5xl font-semibold'>
 						Sign up
-					</Typography>
+					</h1>
 					<Box component='form' noValidate sx={{ mt: 1 }}>
 						<TextField
 							margin='normal'
@@ -64,6 +64,10 @@ const Signup = () => {
 							autoComplete='full-name'
 							type='text'
 							autoFocus
+							sx={{
+								color: 'white',
+								'*': { color: 'inherit', borderColor: 'white' },
+							}}
 						/>
 						<TextField
 							margin='normal'
@@ -73,6 +77,10 @@ const Signup = () => {
 							autoComplete='email'
 							type='email'
 							autoFocus
+							sx={{
+								color: 'white',
+								'*': { color: 'inherit', borderColor: 'white' },
+							}}
 						/>
 						<TextField
 							margin='normal'
@@ -82,6 +90,10 @@ const Signup = () => {
 							autoComplete='username'
 							type='text'
 							autoFocus
+							sx={{
+								color: 'white',
+								'*': { color: 'inherit', borderColor: 'white' },
+							}}
 						/>
 						<TextField
 							margin='normal'
@@ -90,20 +102,22 @@ const Signup = () => {
 							label='Password'
 							type='password'
 							autoComplete='current-password'
+							sx={{
+								color: 'white',
+								'*': { color: 'inherit', borderColor: 'white' },
+							}}
 						/>
-						<Button
+						<button
 							type='submit'
-							fullWidth
-							variant='contained'
-							sx={{ mt: 3, mb: 2 }}
+							className='px-4 my-4 w-full text-white py-2 border-2 border-white font-heading font-semibold hover:bg-white hover:text-primary transition-all'
 						>
-							Sign In
-						</Button>
+							Sign Up
+						</button>
 						<Grid container>
 							<Grid item>
 								<Link
-									to='#'
-									className='underline underline-offset-2'
+									to='/login'
+									className='underline underline-offset-2 text-gray-500 hover:text-white transition-all'
 								>
 									{'Already have an account? Log in'}
 								</Link>
