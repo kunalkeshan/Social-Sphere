@@ -8,7 +8,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
 import { ApiError } from '../utils/apiError';
 import { collections } from '../services/database';
-import User from '../models/user';
+import { User } from '../@types';
 
 const UNAUTHORIZED = {
 	statusCode: 401,

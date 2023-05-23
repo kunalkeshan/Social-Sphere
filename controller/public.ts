@@ -2,8 +2,7 @@
  * Public Controller
  */
 
-import Link from '../models/link';
-import User from '../models/user';
+import { User, Link } from '../@types';
 import { UserProfileSchema } from '../schema/public';
 import { collections } from '../services/database';
 import { ApiError } from '../utils/apiError';

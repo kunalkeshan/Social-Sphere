@@ -4,8 +4,6 @@
 
 // Dependencies
 import { ObjectId } from 'mongodb';
-import Link from '../models/link';
-import User from '../models/user';
 import {
 	CreateLinkSchema,
 	DeleteLinkSchema,
@@ -13,6 +11,7 @@ import {
 } from '../schema/link';
 import { collections } from '../services/database';
 import { ApiError } from '../utils/apiError';
+import { Link, User } from '../@types';
 
 export const fetchUserLinksController = async (user: User) => {
 	const links = (await collections.links

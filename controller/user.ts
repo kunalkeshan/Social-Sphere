@@ -4,7 +4,6 @@
 
 // Dependencies
 import { collections } from '../services/database';
-import User from '../models/user';
 import { uuid } from 'uuidv4';
 import bcrypt from 'bcryptjs';
 import { ApiError } from '../utils/apiError';
@@ -18,6 +17,7 @@ import {
 	UserProfileBioSchema,
 	UserSocialsSchema,
 } from '../schema/user';
+import { User } from '../@types';
 
 export const userIsUniqueController = async (data: UserIsUniqueSchema) => {
 	const query = { [data.query.key]: data.query.value };
