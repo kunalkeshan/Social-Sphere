@@ -1,6 +1,7 @@
 import { Link } from '../../../../@types';
 import CreateLink from '../../components/admin/CreateLink';
 import AdminLink from '../../components/cards/AdminLink';
+import UnderConstruction from '../../components/reusable/UnderConstruction';
 
 const LINKS: Link[] = [
 	{
@@ -36,7 +37,11 @@ const Main = () => {
 					))}
 				</div>
 			</section>
-			<section className='hidden md:col-span-1'></section>
+			<section className='hidden md:flex flex-col text-center items-center'>
+				<p className='text-2xl font-heading font-bold'>Page preview</p>
+				<UnderConstruction />
+				<p>Coming soon!</p>
+			</section>
 		</div>
 	);
 };
