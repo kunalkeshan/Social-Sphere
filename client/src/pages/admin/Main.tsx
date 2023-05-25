@@ -1,7 +1,6 @@
 import { Link } from '../../../../@types';
 import CreateLink from '../../components/admin/CreateLink';
 import AdminLink from '../../components/cards/AdminLink';
-import UnderConstruction from '../../components/reusable/UnderConstruction';
 
 const LINKS: Link[] = [
 	{
@@ -28,21 +27,14 @@ const LINKS: Link[] = [
 
 const Main = () => {
 	return (
-		<div className='grid grid-cols-3 min-h-[80vh]'>
-			<section className='col-span-3 md:col-span-2 md:border-r border-gray-500 px-2 md:px-8'>
-				<CreateLink />
-				<div className='mt-8 flex flex-col gap-8'>
-					{LINKS.map((link, index) => (
-						<AdminLink key={index} {...link} index={index} />
-					))}
-				</div>
-			</section>
-			<section className='hidden md:flex flex-col text-center items-center'>
-				<p className='text-2xl font-heading font-bold'>Page preview</p>
-				<UnderConstruction />
-				<p>Coming soon!</p>
-			</section>
-		</div>
+		<section className='col-span-3 md:col-span-2 md:border-r border-gray-500 px-2 md:px-8'>
+			<CreateLink />
+			<div className='mt-8 flex flex-col gap-8'>
+				{LINKS.map((link, index) => (
+					<AdminLink key={index} {...link} index={index} />
+				))}
+			</div>
+		</section>
 	);
 };
 
