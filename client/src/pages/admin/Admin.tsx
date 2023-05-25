@@ -13,8 +13,13 @@ import {
 import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, Outlet } from 'react-router-dom';
+import UnderConstruction from '../../components/reusable/UnderConstruction';
 
 const pages = [
+	{
+		page: 'Links',
+		url: '/admin',
+	},
 	{
 		page: 'Appearance',
 		url: 'appearance',
@@ -222,8 +227,15 @@ const Admin = () => {
 					</Toolbar>
 				</Container>
 			</AppBar>
-			<main className='max-w-7xl px-16 py-12 mx-auto'>
+			<main className='max-w-7xl px-16 py-12 mx-auto grid grid-cols-3 min-h-[80vh]'>
 				<Outlet />
+				<section className='hidden md:flex flex-col text-center items-center'>
+					<p className='text-2xl font-heading font-bold'>
+						Page preview
+					</p>
+					<UnderConstruction />
+					<p>Coming soon!</p>
+				</section>
 			</main>
 		</>
 	);
