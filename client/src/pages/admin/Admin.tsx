@@ -16,6 +16,10 @@ import { Link, Outlet } from 'react-router-dom';
 
 const pages = [
 	{
+		page: 'Links',
+		url: '/admin',
+	},
+	{
 		page: 'Appearance',
 		url: 'appearance',
 	},
