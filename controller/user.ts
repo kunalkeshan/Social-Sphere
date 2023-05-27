@@ -29,7 +29,14 @@ export const userIsUniqueController = async (data: UserIsUniqueSchema) => {
 
 export const newUserAccountController = async (data: NewUserAccountSchema) => {
 	const count = await collections.users.countDocuments({
-		$or: [{ email: data.body.email, username: data.body.username }],
+		$or: [
+			{
+				email: { $eq: data.body.email },
+			},
+			{
+				username: { $eq: data.body.username },
+			},
+		],
 	});
 	if (count !== 0)
 		throw new ApiError({
