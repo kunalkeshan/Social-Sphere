@@ -30,9 +30,15 @@ export const userSlice = createSlice({
 			);
 			localStorage.setItem(`SocialSphereUserToken`, action.payload.token);
 		},
+		logoutUser: (state) => {
+			state.user = null;
+			state.token = null;
+			localStorage.clear();
+			sessionStorage.clear();
+		},
 	},
 });
 
-export const { loginUser } = userSlice.actions;
+export const { loginUser, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;
