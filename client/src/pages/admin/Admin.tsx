@@ -14,7 +14,7 @@ import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, Outlet } from 'react-router-dom';
 import UnderConstruction from '../../components/reusable/UnderConstruction';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logoutUser } from '../../store/features/user';
 
 const pages = [
@@ -59,6 +59,7 @@ const Admin = () => {
 	);
 
 	const dispatch = useAppDispatch();
+	const { user } = useAppSelector((state) => state.user);
 
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorElNav(event.currentTarget);
@@ -195,8 +196,8 @@ const Admin = () => {
 									sx={{ p: 0 }}
 								>
 									<Avatar
-										alt='Remy Sharp'
-										src='/static/images/avatar/2.jpg'
+										alt={user?.fullName ?? ''}
+										src={user?.avatar ?? ''}
 									/>
 								</IconButton>
 							</Tooltip>
