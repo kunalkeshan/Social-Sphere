@@ -65,9 +65,18 @@ const Signup = () => {
 							type='text'
 							autoFocus
 							sx={{
-								color: 'white',
-								'*': { color: 'inherit', borderColor: 'white' },
+								borderColor: 'white',
+								input: {
+									color: 'white',
+								},
+								label: {
+									color: 'white',
+								},
+								'&.MuiTextField-root': {
+									borderColor: 'white',
+								},
 							}}
+							variant='filled'
 						/>
 						<TextField
 							margin='normal'
@@ -78,9 +87,18 @@ const Signup = () => {
 							type='email'
 							autoFocus
 							sx={{
-								color: 'white',
-								'*': { color: 'inherit', borderColor: 'white' },
+								borderColor: 'white',
+								input: {
+									color: 'white',
+								},
+								label: {
+									color: 'white',
+								},
+								'&.MuiTextField-root': {
+									borderColor: 'white',
+								},
 							}}
+							variant='filled'
 						/>
 						<TextField
 							margin='normal'
@@ -91,9 +109,18 @@ const Signup = () => {
 							type='text'
 							autoFocus
 							sx={{
-								color: 'white',
-								'*': { color: 'inherit', borderColor: 'white' },
+								borderColor: 'white',
+								input: {
+									color: 'white',
+								},
+								label: {
+									color: 'white',
+								},
+								'&.MuiTextField-root': {
+									borderColor: 'white',
+								},
 							}}
+							variant='filled'
 						/>
 						<TextField
 							margin='normal'
@@ -103,9 +130,18 @@ const Signup = () => {
 							type='password'
 							autoComplete='current-password'
 							sx={{
-								color: 'white',
-								'*': { color: 'inherit', borderColor: 'white' },
+								borderColor: 'white',
+								input: {
+									color: 'white',
+								},
+								label: {
+									color: 'white',
+								},
+								'&.MuiTextField-root': {
+									borderColor: 'white',
+								},
 							}}
+							variant='filled'
 						/>
 						<button
 							type='submit'

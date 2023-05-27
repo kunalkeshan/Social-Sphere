@@ -9,6 +9,7 @@ import apiService from '../service/apiService';
 import Lottie from 'lottie-react';
 import LoadingAnimationData from '../assets/loading-paperplane.json';
 import ErrorAnimationData from '../assets/error.json';
+import { toast } from 'react-hot-toast';
 
 interface FetchPublicProfileResponse {
 	links: Link[];
@@ -43,6 +44,19 @@ const PublicProfile = () => {
 	const { data, error, isLoading } = useQuery('userProfileData', () =>
 		fetchPublicProfile(username as string)
 	);
+
+	const handleShareProfile = () => {
+		const shareData = {
+			title: `${data?.user?.fullName} - Social Sphere Profile`,
+			text: data?.user?.bio,
+			url: `${location.protocol}://${location.host}${location.pathname}`,
+		};
+		if (navigator.canShare(shareData)) {
+			navigator.share(shareData);
+		} else {
+			toast('Browser does not support sharing.');
+		}
+	};
 
 	if (error) {
 		return (
@@ -81,13 +95,17 @@ const PublicProfile = () => {
 	}
 
 	return (
-		<main className='max-w-5xl mx-auto w-full px-4 py-8 grid grid-cols-1 gap-8'>
+		<main className='max-w-5xl mx-auto w-full px-4 py-8 grid grid-cols-1 gap-8 min-h-screen'>
 			<section className='flex items-center w-full justify-between'>
 				<p className='font-heading text-3xl font-semibold'>
 					{data?.user?.fullName}
 				</p>
-				<IconButton>
-					<ShareIcon className='text-white' />
+				<IconButton
+					onClick={handleShareProfile}
+					className='transition-all hover:!bg-white group'
+					title={`Share ${data?.user?.fullName}'s Profile`}
+				>
+					<ShareIcon className='text-white group-hover:!text-primary transition-all' />
 				</IconButton>
 			</section>
 			<section className='flex items-center justify-center flex-col gap-2'>
@@ -116,8 +134,15 @@ const PublicProfile = () => {
 			</section>
 			<section className='flex items-center justify-center w-full flex-col gap-2'>
 				<PublicSocials socials={data?.user?.socials} />
-				<p className='font-heading text-sm font-semibold'>
-					&copy; Social Sphere - {new Date().getFullYear()}
+				<p className='font-heading text-sm font-semibold mt-auto'>
+					&copy;{' '}
+					<RouterLink
+						to='/'
+						className='hover:underline underline-offset-2'
+					>
+						Social Sphere
+					</RouterLink>{' '}
+					- {new Date().getFullYear()}
 				</p>
 			</section>
 		</main>
