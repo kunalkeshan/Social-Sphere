@@ -10,7 +10,7 @@ import { userProfileController } from '../controller/public';
 const Router = express.Router();
 
 Router.get(
-	'/:username',
+	'/user/:username',
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const data = await zParse(userProfileSchema, req);
