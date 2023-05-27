@@ -7,11 +7,6 @@ const API_URL =
 
 const apiService = axios.create({
 	baseURL: API_URL,
-	headers: {
-		Authorization: `Bearer ${localStorage.getItem(
-			'SocialSphereAuthToken'
-		)}`,
-	},
 });
 
 export default apiService;

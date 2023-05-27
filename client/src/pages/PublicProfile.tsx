@@ -54,9 +54,7 @@ const PublicProfile = () => {
 		if (navigator.canShare(shareData)) {
 			navigator.share(shareData);
 		} else {
-			toast('Browser does not support sharing.', {
-				position: 'bottom-right',
-			});
+			toast('Browser does not support sharing.');
 		}
 	};
 
