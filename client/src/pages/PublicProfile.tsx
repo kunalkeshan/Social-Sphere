@@ -97,7 +97,7 @@ const PublicProfile = () => {
 	}
 
 	return (
-		<main className='max-w-5xl mx-auto w-full px-4 py-8 grid grid-cols-1 gap-8'>
+		<main className='max-w-5xl mx-auto w-full px-4 py-8 grid grid-cols-1 gap-8 min-h-screen'>
 			<section className='flex items-center w-full justify-between'>
 				<p className='font-heading text-3xl font-semibold'>
 					{data?.user?.fullName}
@@ -136,8 +136,15 @@ const PublicProfile = () => {
 			</section>
 			<section className='flex items-center justify-center w-full flex-col gap-2'>
 				<PublicSocials socials={data?.user?.socials} />
-				<p className='font-heading text-sm font-semibold'>
-					&copy; Social Sphere - {new Date().getFullYear()}
+				<p className='font-heading text-sm font-semibold mt-auto'>
+					&copy;{' '}
+					<RouterLink
+						to='/'
+						className='hover:underline underline-offset-2'
+					>
+						Social Sphere
+					</RouterLink>{' '}
+					- {new Date().getFullYear()}
 				</p>
 			</section>
 		</main>
