@@ -23,7 +23,7 @@ function App() {
 				<Route path='analytics' element={<Analytics />} />
 				<Route path='*' element={<Navigate to='/not-found' />} />
 			</Route>
-			<Route path='/:username' element={<PublicProfile />} />
+			<Route path='/u/:username' element={<PublicProfile />} />
 			<Route path='/not-found' element={<NotFound />} />
 		</Routes>
 	);

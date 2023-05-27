@@ -6,16 +6,18 @@
 import express from 'express';
 import logger from './middleware/morgan';
 import path from 'path';
-import { IS_PRODUCTION, PORT } from './config';
+import { PORT } from './config';
 import { connectToDatabase } from './services/database';
 import errorHandler from './middleware/errorHandler';
 import { ApiError } from './utils/apiError';
 import appRouter from './router';
+import cors from 'cors';
 
 // Initializing Ap
 const app = express();
 
 // Setting up Middleware
+app.use(cors());
 app.use(logger);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
