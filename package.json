@@ -2,10 +2,11 @@
 	"name": "social-sphere",
 	"version": "1.0.0",
 	"description": "Web app that allows users to create their own personal page to share their social media links and other personalized links.",
-	"main": "index.js",
+	"main": "./dist/app.js",
 	"scripts": {
-		"build": "tsc",
-		"start": "nodemon app.ts"
+		"build": "npm i && tsc",
+		"start": "node ./dist/app.js",
+		"dev": "nodemon app.ts"
 	},
 	"repository": {
 		"type": "git",
