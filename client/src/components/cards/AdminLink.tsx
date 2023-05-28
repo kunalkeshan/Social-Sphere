@@ -2,9 +2,19 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link as ILink } from '../../../../@types';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
+import DeleteIcon from '@mui/icons-material/Delete';
+import apiService from '../../service/apiService';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { isAxiosError } from 'axios';
+import { toast } from 'react-hot-toast';
+import { updateLinks } from '../../store/features/user';
 
 interface PublicLinkProps extends ILink {
 	index: number;
+}
+
+interface DeleteLinkResponse {
+	message: string;
 }
 
 const AdminLink: React.FC<PublicLinkProps> = ({
@@ -12,6 +22,7 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 	title,
 	url,
 	index,
+	_id,
 }) => {
 	const [editable, setEditable] = useState({
 		title: false,
@@ -23,6 +34,9 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 	const inputTitleRef = useRef<HTMLInputElement | null>(null);
 	const inputDescriptionRef = useRef<HTMLInputElement | null>(null);
 	const inputUrlRef = useRef<HTMLInputElement | null>(null);
+
+	const dispatch = useAppDispatch();
+	const { links } = useAppSelector((state) => state.user);
 
 	const handleInput =
 		(prop: keyof typeof input) =>
@@ -39,6 +53,39 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 			});
 		};
 
+	const handleDeleteLink = async () => {
+		try {
+			const response = await apiService.delete<DeleteLinkResponse>(
+				'/api/link',
+				{
+					data: { id: _id },
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem(
+							'SocialSphereUserToken'
+						)}`,
+					},
+				}
+			);
+			if (response.status === 200) {
+				toast.success('Link deleted successfully!');
+				const updatedLinks = links?.filter((link) => link._id !== _id);
+				dispatch(updateLinks(updatedLinks as ILink[]));
+			}
+		} catch (error) {
+			if (isAxiosError(error)) {
+				if (
+					error.response?.data.message === 'link/link-does-not-exist'
+				) {
+					toast.error('Link does not exist. Reload the page.');
+				} else {
+					toast('Something went wrong. Try again later.');
+				}
+			} else {
+				toast('Something went wrong. Try again later.');
+			}
+		}
+	};
+
 	useEffect(() => {
 		if (editable.title) {
 			inputTitleRef.current?.focus();
@@ -53,6 +100,13 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 		<div className='flex flex-col px-8 py-4 border-2 border-white gap-2 w-full relative'>
 			<span className='absolute bg-white font-heading font-bold text-lg -top-2 -left-2 text-primary rounded-full p-2 w-6 h-6 flex items-center justify-center -rotate-12'>
 				{index + 1}
+			</span>
+			<span
+				title='Delete Link'
+				onClick={handleDeleteLink}
+				className='absolute bg-white font-heading font-bold text-lg -bottom-2 -right-2 text-primary rounded-full p-2 w-6 h-6 flex items-center justify-center rotate-12 curosr-pointer hover:scale-110 transition-all cursor-pointer hover:text-red-500'
+			>
+				<DeleteIcon />
 			</span>
 			<div className='w-full flex items-center justify-between gap-2'>
 				<input

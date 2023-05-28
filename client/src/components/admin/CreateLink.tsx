@@ -1,10 +1,23 @@
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
+import { updateLinks } from '../../store/features/user';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import apiService from '../../service/apiService';
+import { Link } from '../../../../@types';
+import { toast } from 'react-hot-toast';
+
+interface CreateNewLinkResponse {
+	link: Link;
+	message: string;
+}
 
 const CreateLink = () => {
 	const [isInEdit, setIsInEdit] = useState(false);
 	const [input, setInput] = useState({ title: '', description: '', url: '' });
+
+	const dispatch = useAppDispatch();
+	const { links } = useAppSelector((state) => state.user);
 
 	const handleInput =
 		(prop: keyof typeof input) =>
@@ -13,6 +26,34 @@ const CreateLink = () => {
 				return { ...prev, [prop]: e.target.value };
 			});
 		};
+
+	const handleCreateNewLink = async (
+		e: React.ChangeEvent<HTMLFormElement>
+	) => {
+		e.preventDefault();
+		try {
+			const response = await apiService.post<CreateNewLinkResponse>(
+				'/api/link',
+				{ ...input },
+				{
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem(
+							'SocialSphereUserToken'
+						)}`,
+					},
+				}
+			);
+			if (response.status === 201) {
+				toast.success('New Link created successfully!');
+				dispatch(updateLinks([...(links ?? []), response.data.link]));
+				setTimeout(() => {
+					setIsInEdit(false);
+				}, 500);
+			}
+		} catch (error) {
+			toast.error('Something went wrong, try again later!');
+		}
+	};
 
 	return (
 		<div>
@@ -31,11 +72,9 @@ const CreateLink = () => {
 							<CloseIcon className='text-white' />
 						</Button>
 					</div>
-					<Box
-						component='form'
-						noValidate
-						sx={{ mt: 2, fontFamily: 'Inter' }}
-						className='grid grid-cols-1 gap-4'
+					<form
+						className='grid grid-cols-1 gap-4 mt-2 font-["Inter"]'
+						onSubmit={handleCreateNewLink}
 					>
 						<input
 							type='text'
@@ -67,7 +106,7 @@ const CreateLink = () => {
 						>
 							Add
 						</button>
-					</Box>
+					</form>
 				</div>
 			)}
 		</div>
