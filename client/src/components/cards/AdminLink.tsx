@@ -53,6 +53,45 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 			});
 		};
 
+	const handleEditLink = (props: keyof typeof input) => async () => {
+		try {
+			if (input[props].length === 0) {
+				toast.error(`${props} cannot be empty!`);
+				if (props === 'title') {
+					inputTitleRef.current?.focus();
+				} else if (props === 'description') {
+					inputDescriptionRef.current?.focus();
+				} else if (props === 'url') {
+					inputUrlRef.current?.focus();
+				}
+				handleEditable(props)(true);
+				return;
+			}
+			const response = await apiService.put(
+				'/api/link',
+				{ id: _id, key: props, value: input[props] },
+				{
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem(
+							'SocialSphereUserToken'
+						)}`,
+					},
+				}
+			);
+			if (response.status === 200) {
+				const updatedLinks = links?.map((link) => {
+					if (link._id === _id) {
+						link = { ...link, ...input };
+					}
+					return link;
+				});
+				dispatch(updateLinks(updatedLinks as ILink[]));
+			}
+		} catch (error) {
+			toast('Something went wrong. Try again later.');
+		}
+	};
+
 	const handleDeleteLink = async () => {
 		try {
 			const response = await apiService.delete<DeleteLinkResponse>(
@@ -66,6 +105,7 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 					},
 				}
 			);
+
 			if (response.status === 200) {
 				toast.success('Link deleted successfully!');
 				const updatedLinks = links?.filter((link) => link._id !== _id);
@@ -117,6 +157,11 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 					placeholder='Title'
 					disabled={!editable.title}
 					ref={inputTitleRef}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter') {
+							handleEditLink('title')();
+						}
+					}}
 				/>
 				{!editable.title ? (
 					<EditIcon
@@ -130,7 +175,10 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 						className={
 							'cursor-pointer text-gray-500 hover:text-white'
 						}
-						onClick={() => handleEditable('title')(false)}
+						onClick={() => {
+							handleEditLink('title')();
+							// handleEditable('title')(false);
+						}}
 					/>
 				)}
 			</div>
@@ -143,6 +191,11 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 					placeholder='Description'
 					disabled={!editable.description}
 					ref={inputDescriptionRef}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter') {
+							handleEditLink('description')();
+						}
+					}}
 				/>
 				{!editable.description ? (
 					<EditIcon
@@ -156,7 +209,10 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 						className={
 							'cursor-pointer text-gray-500 hover:text-white'
 						}
-						onClick={() => handleEditable('description')(false)}
+						onClick={() => {
+							handleEditLink('description')();
+							// handleEditable('description')(false);
+						}}
 					/>
 				)}
 			</div>
@@ -169,6 +225,11 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 					placeholder='URL'
 					disabled={!editable.url}
 					ref={inputUrlRef}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter') {
+							handleEditLink('url')();
+						}
+					}}
 				/>
 				{!editable.url ? (
 					<EditIcon
@@ -182,7 +243,10 @@ const AdminLink: React.FC<PublicLinkProps> = ({
 						className={
 							'cursor-pointer text-gray-500 hover:text-white'
 						}
-						onClick={() => handleEditable('url')(false)}
+						onClick={() => {
+							handleEditLink('url')();
+							// handleEditable('url')(false);
+						}}
 					/>
 				)}
 			</div>
