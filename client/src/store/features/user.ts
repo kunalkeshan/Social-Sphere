@@ -34,6 +34,9 @@ export const userSlice = createSlice({
 			);
 			localStorage.setItem(`SocialSphereUserToken`, action.payload.token);
 		},
+		updateUserDetails: (state, action: PayloadAction<Partial<User>>) => {
+			state.user = { ...state.user, ...(action.payload as User) };
+		},
 		updateLinks: (state, action: PayloadAction<Link[]>) => {
 			state.links = action.payload;
 			sessionStorage.setItem(
@@ -50,6 +53,7 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { loginUser, logoutUser, updateLinks } = userSlice.actions;
+export const { loginUser, logoutUser, updateLinks, updateUserDetails } =
+	userSlice.actions;
 
 export default userSlice.reducer;
