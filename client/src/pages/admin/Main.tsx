@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 import { Link } from '../../../../@types';
 import CreateLink from '../../components/admin/CreateLink';
 import AdminLink from '../../components/cards/AdminLink';
 import apiService from '../../service/apiService';
 import { useQuery } from 'react-query';
+import { useAppDispatch } from '../../hooks/hooks';
+import { updateLinks } from '../../store/features/user';
 import Lottie from 'lottie-react';
 import LoadingAnimationData from '../../assets/loading-paperplane.json';
 import ErrorAnimationData from '../../assets/error.json';
@@ -43,6 +46,11 @@ const Main = () => {
 	const { data, error, isLoading } = useQuery('adminLinks', () =>
 		fetchAdminLinks()
 	);
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		if (data?.length) dispatch(updateLinks(data));
+	}, [data, dispatch]);
 
 	return (
 		<section className='col-span-3 md:col-span-2 md:border-r border-gray-500 px-2 md:px-8'>
