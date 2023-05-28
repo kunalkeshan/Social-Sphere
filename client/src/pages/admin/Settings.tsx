@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -8,7 +8,7 @@ import PublicIcon from '@mui/icons-material/Public';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { User } from '../../../../@types';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 
 const Settings = () => {
 	const PROFILE: User = {
