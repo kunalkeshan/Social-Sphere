@@ -16,6 +16,7 @@ export async function connectToDatabase() {
 
 	const db: mongoDB.Db = client.db(MONGODB.DB_NAME);
 
+	// Connecting Collections
 	const usersCollection: mongoDB.Collection = db.collection(
 		MONGODB.USERS_COLLECTION_NAME
 	);
@@ -23,6 +24,7 @@ export async function connectToDatabase() {
 		MONGODB.LINKS_COLLECTION_NAME
 	);
 
+	// Linking Collections
 	collections.users = usersCollection;
 	collections.links = linksCollection;
 
