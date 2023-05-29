@@ -7,26 +7,9 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import PublicIcon from '@mui/icons-material/Public';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import { User } from '../../../../@types';
 import { useAppSelector } from '../../hooks/hooks';
 
 const Settings = () => {
-	const PROFILE: User = {
-		fullName: 'Kunal Keshan',
-		email: 'kunalkeshan12@gmail.com',
-		username: 'kunalkeshan',
-		password:
-			'$2a$10$65z5LeDJ5D0lnyzB6AC7megCyhbUj.sz8iW6WpS2mX7TVUET./Xvu',
-		publicId: '93e06117-b471-474d-99b3-bebc231ba481',
-		avatar: 'https://api.dicebear.com/6.x/thumbs/svg?seed=93e06117-b471-474d-99b3-bebc231ba481',
-		title: 'kunalkeshan',
-		bio: 'I help build websites.',
-		socials: {
-			website: 'https://kunalkeshan.dev',
-			instagram: 'https://instagram.com/kunalkeshan',
-		},
-	};
-
 	const { user } = useAppSelector((state) => state.user);
 
 	return (
@@ -42,8 +25,9 @@ const Settings = () => {
 						<InstagramIcon />
 						<input
 							type='text'
-							value={PROFILE.socials?.instagram}
+							value={user?.socials?.instagram}
 							className='bg-transparent w-full text-gray-500 outline-none hover:text-white transition-all hover:underline focus:underline focus:text-white'
+							placeholder='Click to enter you Instagram URL.'
 						/>
 					</div>
 
@@ -53,6 +37,7 @@ const Settings = () => {
 							type='text'
 							value={user?.socials?.facebook ?? ''}
 							className='bg-transparent w-full text-gray-500 outline-none hover:text-white transition-all hover:underline focus:underline focus:text-white'
+							placeholder='Click to enter you Facebook URL.'
 						/>
 					</div>
 
@@ -62,6 +47,7 @@ const Settings = () => {
 							type='text'
 							value={user?.socials?.linkedin ?? ''}
 							className='bg-transparent w-full text-gray-500 outline-none hover:text-white transition-all hover:underline focus:underline focus:text-white'
+							placeholder='Click to enter you LinkedIn URL.'
 						/>
 					</div>
 
@@ -71,6 +57,7 @@ const Settings = () => {
 							type='text'
 							value={user?.socials?.twitter ?? ''}
 							className='bg-transparent w-full text-gray-500 outline-none hover:text-white transition-all hover:underline focus:underline focus:text-white'
+							placeholder='Click to enter you Twitter URL.'
 						/>
 					</div>
 
@@ -80,6 +67,7 @@ const Settings = () => {
 							type='text'
 							value={user?.socials?.youtube ?? ''}
 							className='bg-transparent w-full text-gray-500 outline-none hover:text-white transition-all hover:underline focus:underline focus:text-white'
+							placeholder='Click to enter you YouTube URL.'
 						/>
 					</div>
 
@@ -89,6 +77,7 @@ const Settings = () => {
 							type='text'
 							value={user?.socials?.website ?? ''}
 							className='bg-transparent w-full text-gray-500 outline-none hover:text-white transition-all hover:underline focus:underline focus:text-white'
+							placeholder='Click to enter you Website URL.'
 						/>
 					</div>
 
@@ -98,6 +87,7 @@ const Settings = () => {
 							type='text'
 							value={user?.socials?.email ?? ''}
 							className='bg-transparent w-full text-gray-500 outline-none hover:text-white transition-all hover:underline focus:underline focus:text-white'
+							placeholder='Click to enter you Email.'
 						/>
 					</div>
 				</div>
