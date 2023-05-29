@@ -16,6 +16,8 @@ import { Link, Outlet } from 'react-router-dom';
 import UnderConstruction from '../../components/reusable/UnderConstruction';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logoutUser } from '../../store/features/user';
+import ShareIcon from '@mui/icons-material/Share';
+import { toast } from 'react-hot-toast';
 
 const pages = [
 	{
@@ -78,6 +80,19 @@ const Admin = () => {
 
 	const handleLogout = () => {
 		dispatch(logoutUser());
+	};
+
+	const handleShareProfile = () => {
+		const shareData = {
+			title: `${user?.fullName} - Social Sphere Profile`,
+			text: user?.bio,
+			url: `${location.protocol}://${location.host}${location.pathname}`,
+		};
+		if (navigator.canShare(shareData)) {
+			navigator.share(shareData);
+		} else {
+			toast('Browser does not support sharing.');
+		}
 	};
 
 	return (
@@ -190,17 +205,27 @@ const Admin = () => {
 							))}
 						</Box>
 						<Box sx={{ flexGrow: 0 }}>
-							<Tooltip title='Open settings'>
-								<IconButton
-									onClick={handleOpenUserMenu}
-									sx={{ p: 0 }}
-								>
-									<Avatar
-										alt={user?.fullName ?? ''}
-										src={user?.avatar ?? ''}
-									/>
-								</IconButton>
-							</Tooltip>
+							<div className='flex items-center gap-2 md:gap-4'>
+								<Tooltip title='Open settings'>
+									<IconButton
+										onClick={handleOpenUserMenu}
+										sx={{ p: 0 }}
+									>
+										<Avatar
+											alt={user?.fullName ?? ''}
+											src={user?.avatar ?? ''}
+										/>
+									</IconButton>
+								</Tooltip>
+								<Tooltip title='Share profile'>
+									<IconButton
+										onClick={handleShareProfile}
+										className='transition-all hover:!bg-white group'
+									>
+										<ShareIcon className='text-white group-hover:!text-primary transition-all' />
+									</IconButton>
+								</Tooltip>
+							</div>
 							<Menu
 								sx={{ mt: '45px' }}
 								id='menu-appbar'
