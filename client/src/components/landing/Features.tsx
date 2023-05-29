@@ -1,3 +1,7 @@
+/**
+ * Features Section - Landing Page
+ */
+
 const Features = () => {
 	const FEATURES = [
 		{

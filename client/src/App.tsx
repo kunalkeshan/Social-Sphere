@@ -15,6 +15,8 @@ import { useAppSelector } from './hooks/hooks';
 function App() {
 	const { user, token } = useAppSelector((state) => state.user);
 
+	// Check if user is logged in based on the presence of
+	// user and token state which is fetched from localStorage
 	const CheckUserAlreadyLoggedIn: React.FC<PropsWithChildren> = ({
 		children,
 	}) => {
@@ -25,6 +27,7 @@ function App() {
 		);
 	};
 
+	// Allows only if the user and token state is present
 	const ProtectedRoute: React.FC<PropsWithChildren> = ({ children }) => {
 		return typeof user === 'object' && typeof token === 'string' ? (
 			<>{children}</>

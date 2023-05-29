@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+// User State
+
+// Dependencies
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Link, User } from '../../../../@types';
 
@@ -53,6 +56,7 @@ export const userSlice = createSlice({
 	},
 });
 
+// User Action Exports
 export const { loginUser, logoutUser, updateLinks, updateUserDetails } =
 	userSlice.actions;
 

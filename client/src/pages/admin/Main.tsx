@@ -1,3 +1,8 @@
+/**
+ * Admin Links Page
+ */
+
+// Dependencies
 import { useEffect } from 'react';
 import { Link } from '../../../../@types';
 import CreateLink from '../../components/admin/CreateLink';

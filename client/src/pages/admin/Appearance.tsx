@@ -1,3 +1,8 @@
+/**
+ * Admin Appearance Page
+ */
+
+// Dependencies
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import apiService from '../../service/apiService';

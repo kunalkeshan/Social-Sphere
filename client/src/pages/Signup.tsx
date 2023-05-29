@@ -1,3 +1,8 @@
+/**
+ * Signup Page
+ */
+
+// Dependencies
 import {
 	Grid,
 	CssBaseline,

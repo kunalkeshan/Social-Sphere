@@ -1,3 +1,8 @@
+/**
+ * Admin Analytics Page
+ */
+
+// Dependencies
 import UnderConstruction from '../../components/reusable/UnderConstruction';
 
 const Analytics = () => {

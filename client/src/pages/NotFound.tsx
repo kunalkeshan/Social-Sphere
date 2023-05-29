@@ -1,3 +1,8 @@
+/**
+ * Not Found Page
+ */
+
+// Dependencies
 import { Link } from 'react-router-dom';
 import Footer from '../components/layouts/Footer';
 import Navbar from '../components/layouts/Navbar';

@@ -1,3 +1,8 @@
+/**
+ * Link Component - Public
+ */
+
+// Dependencies
 import React from 'react';
 import { Link as ILink } from '../../../../@types';
 import IosShareIcon from '@mui/icons-material/IosShare';

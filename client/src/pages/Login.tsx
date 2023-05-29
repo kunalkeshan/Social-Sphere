@@ -1,3 +1,8 @@
+/**
+ * Login Page
+ */
+
+// Dependencies
 import React, { useState } from 'react';
 import {
 	Grid,

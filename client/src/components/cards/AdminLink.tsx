@@ -1,3 +1,8 @@
+/**
+ * Link Component - Admin
+ */
+
+// Dependencies
 import React, { useState, useRef, useEffect } from 'react';
 import { Link as ILink } from '../../../../@types';
 import EditIcon from '@mui/icons-material/Edit';

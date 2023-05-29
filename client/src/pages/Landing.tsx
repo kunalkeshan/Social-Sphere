@@ -1,3 +1,8 @@
+/**
+ * Landing Page
+ */
+
+// Dependencies
 import Features from '../components/landing/Features';
 import Intro from '../components/landing/Intro';
 import Footer from '../components/layouts/Footer';

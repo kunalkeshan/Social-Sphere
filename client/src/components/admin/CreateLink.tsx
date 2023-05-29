@@ -1,3 +1,8 @@
+/**
+ * Admin Create New Link Component
+ */
+
+// Dependencies
 import { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button } from '@mui/material';
