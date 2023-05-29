@@ -13,6 +13,13 @@ import { collections } from '../services/database';
 import { ApiError } from '../utils/apiError';
 import { Link, User } from '../@types';
 
+/**
+ *
+ * @param user User
+ * @returns Links
+ * @method GET
+ * @route /api/link
+ */
 export const fetchUserLinksController = async (user: User) => {
 	const links = (await collections.links
 		.find({ userId: user.publicId })
@@ -20,6 +27,14 @@ export const fetchUserLinksController = async (user: User) => {
 	return { links };
 };
 
+/**
+ *
+ * @param data CreateLinkSchema
+ * @param user User
+ * @returns Link
+ * @method POST
+ * @route /api/link
+ */
 export const createLinkController = async (
 	data: CreateLinkSchema,
 	user: User
@@ -37,6 +52,13 @@ export const createLinkController = async (
 	}
 };
 
+/**
+ *
+ * @param data EditLinkSchema
+ * @returns Promise<void>
+ * @method PUT
+ * @route /api/link
+ */
 export const editLinkController = async (data: EditLinkSchema) => {
 	const count = await collections.links.countDocuments({
 		_id: new ObjectId(data.body.id),
@@ -61,6 +83,13 @@ export const editLinkController = async (data: EditLinkSchema) => {
 	}
 };
 
+/**
+ *
+ * @param data DeleteLinkSchema
+ * @returns Promise<void>
+ * @method DELETE
+ * @route /api/link
+ */
 export const deleteLinkController = async (data: DeleteLinkSchema) => {
 	const count = await collections.links.countDocuments({
 		_id: new ObjectId(data.body.id),

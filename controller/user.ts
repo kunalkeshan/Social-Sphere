@@ -19,6 +19,13 @@ import {
 } from '../schema/user';
 import { User } from '../@types';
 
+/**
+ * @description Checks if a user is unique or not.
+ * @param data UserIsUniqueSchema
+ * @returns Promise<{isUnique}>
+ * @method POST
+ * @route /api/user/is-unique
+ */
 export const userIsUniqueController = async (data: UserIsUniqueSchema) => {
 	const query = { [data.query.key]: data.query.value };
 	const count = await collections.users.countDocuments(query);
@@ -27,6 +34,13 @@ export const userIsUniqueController = async (data: UserIsUniqueSchema) => {
 	};
 };
 
+/**
+ * @description Create a new user account with their fullName, username, email & password.
+ * @param data NewUserAccountSchema
+ * @returns Promise<{user, token}>
+ * @method POST
+ * @route /api/user/
+ */
 export const newUserAccountController = async (data: NewUserAccountSchema) => {
 	const count = await collections.users.countDocuments({
 		$or: [
@@ -70,6 +84,13 @@ export const newUserAccountController = async (data: NewUserAccountSchema) => {
 	}
 };
 
+/**
+ * @description Login user with username and password.
+ * @param data LoginUserSchema
+ * @returns Promise<{user, token}>
+ * @method POST
+ * @route /api/user/login
+ */
 export const loginUserController = async (data: LoginUserSchema) => {
 	const user = (await collections.users.findOne({
 		username: data.body.username,
@@ -99,6 +120,14 @@ export const loginUserController = async (data: LoginUserSchema) => {
 	}
 };
 
+/**
+ * @description Update user's profile titile.
+ * @param data UserProfileTitleSchema
+ * @param user User
+ * @returns Promise<void>
+ * @method POST
+ * @route /api/profile/title
+ */
 export const userProfileTitleController = async (
 	data: UserProfileTitleSchema,
 	user: User
@@ -118,6 +147,14 @@ export const userProfileTitleController = async (
 	}
 };
 
+/**
+ * @description Update user's profile bio.
+ * @param data UserProfileBioSchema
+ * @param user User
+ * @returns Promise<void>
+ * @method POST
+ * @route /api/profile/bio
+ */
 export const userProfileBioController = async (
 	data: UserProfileBioSchema,
 	user: User
@@ -137,6 +174,15 @@ export const userProfileBioController = async (
 	}
 };
 
+/**
+ * @description Update a social link for the user based on the
+ * key provided in the request body.
+ * @param data UserSocialsSchema
+ * @param user User
+ * @returns Promise<void>
+ * @method POST
+ * @route /api/profile/socials
+ */
 export const userSocialsController = async (
 	data: UserSocialsSchema,
 	user: User
