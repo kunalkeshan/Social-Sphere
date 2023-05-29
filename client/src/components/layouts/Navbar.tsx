@@ -1,3 +1,8 @@
+/**
+ * Navbar Component
+ */
+
+// Dependencies
 import { Box, AppBar, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 

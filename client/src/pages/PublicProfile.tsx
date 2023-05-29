@@ -1,3 +1,8 @@
+/**
+ * Public Profile Page
+ */
+
+// Dependencies
 import ShareIcon from '@mui/icons-material/Share';
 import { Link, User } from '../../../@types/';
 import { IconButton } from '@mui/material';

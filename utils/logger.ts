@@ -1,4 +1,11 @@
+/**
+ * Application Logger
+ */
+
+// Dependencies
 import winston from 'winston';
+
+// Configuration
 
 const levels = {
 	error: 0,
@@ -21,6 +28,8 @@ const colors = {
 	http: 'magenta',
 	debug: 'white',
 };
+
+// Setting up logger
 
 winston.addColors(colors);
 

@@ -1,3 +1,8 @@
+/**
+ * Admin Settings Page
+ */
+
+// Dependencies
 import { useState } from 'react';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import InstagramIcon from '@mui/icons-material/Instagram';

@@ -1,3 +1,8 @@
+/**
+ * Intro Section - Landing Page
+ */
+
+// Dependencies
 import { Link } from 'react-router-dom';
 
 const Intro = () => {

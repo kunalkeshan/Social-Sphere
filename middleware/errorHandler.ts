@@ -7,6 +7,14 @@ import { ErrorRequestHandler } from 'express';
 import { ApiError } from '../utils/apiError';
 import { IS_PRODUCTION } from '../config';
 
+/**
+ *
+ * @param err Error
+ * @param req Request
+ * @param res Response
+ * @param next NextFunction
+ * @returns void
+ */
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 	!IS_PRODUCTION && console.log(err);
 	if (err instanceof ApiError) {

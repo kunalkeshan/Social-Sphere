@@ -1,7 +1,19 @@
-import type { Request, Response, NextFunction } from 'express';
-import { AnyZodObject, ZodError, z } from 'zod';
+/**
+ * Schema Validator for Incoming requests
+ */
+
+// Dependencies
+import type { Request } from 'express';
+import { AnyZodObject, z } from 'zod';
 import { ApiError } from './apiError';
 
+/**
+ *
+ * @param schema ZodSchema
+ * @param req Request - Express Request object
+ * @returns { req } - Parsed Schema
+ * @example const {body: {email}} = zParse(checkEmailSchema, req)
+ */
 export async function zParse<T extends AnyZodObject>(
 	schema: T,
 	req: Request

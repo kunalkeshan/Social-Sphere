@@ -1,3 +1,8 @@
+/**
+ * Admin Layout Page
+ */
+
+// Dependencies
 import {
 	AppBar,
 	Avatar,

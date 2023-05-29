@@ -9,6 +9,13 @@ import { ApiError } from '../utils/apiError';
 
 // Dependencies
 
+/**
+ *
+ * @param data UserProfileSchema
+ * @returns User and Links
+ * @method GET
+ * @route /api/user/:username
+ */
 export const userProfileController = async (data: UserProfileSchema) => {
 	const user = (await collections.users.findOne({
 		username: data.params.username,

@@ -10,6 +10,7 @@ import { ApiError } from '../utils/apiError';
 import { collections } from '../services/database';
 import { User } from '../@types';
 
+// Default Unauthorized Message
 const UNAUTHORIZED = {
 	statusCode: 401,
 	message: 'app/unauthorized-request',
@@ -21,6 +22,13 @@ interface UserAuthDecoded extends JwtPayload {
 	id: string;
 }
 
+/**
+ *
+ * @param req Request
+ * @param res Response
+ * @param next NextFunction
+ * @returns void
+ */
 export const auth: RequestHandler = async (req, res, next) => {
 	try {
 		const [name, token]: [string, string] | string[] =
