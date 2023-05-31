@@ -49,6 +49,8 @@ To get started with Social Sphere locally, follow these steps:
 6. Access the application in your browser at <http://localhost:3000> the client application.
 7. Access the server at <http://localhost:5000>.
 
+Backend Endpoint Testing and Documentation was done using Postman, check the collection here: [https://documenter.getpostman.com/view/16698636/2s93mATzaQ](https://documenter.getpostman.com/view/16698636/2s93mATzaQ).
+
 ## 🌌 Features
 
 - User authentication and authorization
