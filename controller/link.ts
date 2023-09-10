@@ -42,6 +42,11 @@ export const createLinkController = async (
 	const link = { ...data.body, userId: user.publicId } as Link;
 	const result = await collections.links.insertOne(link);
 	if (result) {
+		await collections.analytics.insertOne({
+			linkId: result.insertedId,
+			clickCount: 0,
+			clickedAt: [],
+		});
 		link.id = result.insertedId;
 		return { link };
 	} else {
@@ -103,6 +108,9 @@ export const deleteLinkController = async (data: DeleteLinkSchema) => {
 		_id: new ObjectId(data.body.id),
 	});
 	if (response) {
+		await collections.analytics.deleteOne({
+			linkId: new ObjectId(data.body.id),
+		});
 		return Promise.resolve();
 	} else {
 		throw new ApiError({
