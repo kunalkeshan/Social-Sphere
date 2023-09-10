@@ -11,6 +11,7 @@ import Settings from './pages/admin/Settings';
 import Appearance from './pages/admin/Appearance';
 import Analytics from './pages/admin/Analytics';
 import { useAppSelector } from './hooks/hooks';
+import ForgotPasswordPage from './pages/ForgotPassword';
 
 function App() {
 	const { user, token } = useAppSelector((state) => state.user);
@@ -52,6 +53,14 @@ function App() {
 				element={
 					<CheckUserAlreadyLoggedIn>
 						<Signup />
+					</CheckUserAlreadyLoggedIn>
+				}
+			/>
+			<Route
+				path='/forgot-password'
+				element={
+					<CheckUserAlreadyLoggedIn>
+						<ForgotPasswordPage />
 					</CheckUserAlreadyLoggedIn>
 				}
 			/>
