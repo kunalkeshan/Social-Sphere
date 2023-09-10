@@ -15,7 +15,6 @@ export const updateLinkCountController = async (
 	const analytics = await collections.analytics.findOne({
 		linkId: new ObjectId(data.body.linkId),
 	});
-	console.log(analytics);
 	if (!analytics) {
 		const newAnalytics = {
 			linkId: new ObjectId(data.body.linkId),
