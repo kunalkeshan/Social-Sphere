@@ -6,6 +6,7 @@ import { MONGODB } from '../config';
 export const collections: {
 	users?: mongoDB.Collection;
 	links?: mongoDB.Collection;
+	analytics?: mongoDB.Collection;
 } = {};
 
 // Initialize Connection
@@ -23,10 +24,14 @@ export async function connectToDatabase() {
 	const linksCollection: mongoDB.Collection = db.collection(
 		MONGODB.LINKS_COLLECTION_NAME
 	);
+	const analyticsCollection: mongoDB.Collection = db.collection(
+		MONGODB.ANALYTICS_COLLECTION_NAME
+	);
 
 	// Linking Collections
 	collections.users = usersCollection;
 	collections.links = linksCollection;
+	collections.analytics = analyticsCollection;
 
 	console.log(`Successfully connected to database: ${db.databaseName}.`);
 }

@@ -50,6 +50,8 @@ const PublicProfile = () => {
 		fetchPublicProfile(username as string)
 	);
 
+	console.log(data);
+
 	const handleShareProfile = () => {
 		const shareData = {
 			title: `${data?.user?.fullName} - Social Sphere Profile`,

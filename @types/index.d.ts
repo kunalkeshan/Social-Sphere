@@ -30,3 +30,11 @@ interface Link {
 	id?: ObjectId;
 	_id?: ObjectId;
 }
+
+interface Analytics {
+	clickCount: number;
+	clickedAt: Array<Date>;
+	linkId: Link['id'];
+	id?: ObjectId;
+	_id?: ObjectId;
+}
