@@ -1,46 +1,113 @@
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import {
+  Grid,
+  CssBaseline,
+  Box,
+  Avatar,
+  TextField,
+  Paper,
+  IconButton,
+  InputAdornment,
+} from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
-const ForgotPasswordPage = () => {
+const ForgotPassword = () => {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    // Implement the password reset logic here
+    // You can use an API call to send a reset password link to the user's email
+    // Handle loading and error states as needed
+  };
+
   return (
-    <section className='max-w-screen-2xl mx-auto flex flex-col md:flex-row gap-12 items-center'>
-      <div className='w-full md:w-1/2 mx-20 text-center md:text-left'>
-        <h1 className='font-heading text-3xl md:text-5xl md:mb-4 mt-12'>
-          Forgot Your Password?
-        </h1>
-        <p className='text-sm md:ml-0 ml-6 md:text-2xl mt-6'>
-          Don't worry! We'll help you reset your password. Please enter your email address, and we'll send you instructions on how to reset it.
-        </p>
-        <form className='flex flex-col gap-4 items-center md:items-start'>
-          <label className='text-base md:text-lg md:mt-12 mt-4' htmlFor='email'>
-            Email Address
-          </label>
-          <input
-            type='email'
-            id='email'
-            name='email'
-            className='border-2 border-gray-300 text-black px-4 py-2 mt-4 md:w-60 w-52 md:ml-0 rounded-md focus:outline-none'
-            placeholder='Your Email'
-          />
-          <button
-            type='submit'
-            className='px-4 py-2 md:w-60 md:ml-0 border-2 border-white font-heading w-fit font-semibold bg-primary text-white hover:bg-white hover:text-primary transition-all'
-          >
-            Reset Password
-          </button>
-        </form>
-        <Link to='/signup' className='text-primary hover:underline text-lg md:text-xl'>
-          Back to Signup
-        </Link>
-      </div>
-      <div className='w-full md:w-2/3'>
-        <img
-          src='/clip2.jpg'
-          alt='Forgot Password'
-          className='md:w-full md:h-screen h-0 w-0  mx-autox'
-        />
-      </div>
-    </section>
+    <Grid container component="main" sx={{ height: '100vh' }}>
+      <CssBaseline />
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={7}
+        sx={{
+          backgroundImage: 'url(/forgot.png)', // Replace with your background image
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '60% 60%',
+          backgroundPosition: 'center',
+        }}
+      />
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
+        sx={{ fontFamily: 'Inter', background: '#2A2A2A' }}
+        className="!text-white"
+      >
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <h1 className="font-heading text-3xl md:text-5xl font-semibold">
+            Forgot Password
+          </h1>
+          <form className="mt-1" onSubmit={handleForgotPassword}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              label="Email Address"
+              autoComplete="email"
+              type="email"
+              autoFocus
+              sx={{
+                borderColor: 'white',
+                input: {
+                  color: 'white',
+                },
+                label: {
+                  color: 'white',
+                },
+                '&.MuiTextField-root': {
+                  borderColor: 'white',
+                },
+              }}
+              variant="filled"
+              value={email}
+              onChange={handleEmailChange}
+            />
+            <button
+              type="submit"
+              className={`cursor-pointer ${
+                loading
+                  ? 'cursor-default opacity-60'
+                  : 'hover:bg-white hover:text-primary'
+              } px-4 text-white my-4 w-full py-2 border-2 border-white font-heading font-semibold transition-all`}
+              disabled={loading}
+            >
+              {loading ? 'Sending Email...' : 'Reset Password'}
+            </button>
+          </form>
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 
-export default ForgotPasswordPage;
+export default ForgotPassword;
