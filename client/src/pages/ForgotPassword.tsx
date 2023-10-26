@@ -21,9 +21,7 @@ const ForgotPasswordPage = () => {
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
-    // Implement the password reset logic here
-    // You can use an API call to send a reset password link to the user's email
-    // Handle loading and error states as needed
+  //logic
   };
 
   return (
@@ -35,7 +33,7 @@ const ForgotPasswordPage = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(/forgot.png)', // Replace with your background image
+          backgroundImage: 'url(/forgot.png)',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '60% 60%',
           backgroundPosition: 'center',
@@ -110,4 +108,4 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage ;
+export default ForgotPasswordPage;
