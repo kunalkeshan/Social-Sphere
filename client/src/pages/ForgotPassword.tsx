@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
   Grid,
   CssBaseline,
@@ -6,24 +5,10 @@ import {
   Avatar,
   TextField,
   Paper,
-  IconButton,
-  InputAdornment,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const ForgotPasswordPage = () => {
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handleForgotPassword = async (e) => {
-    e.preventDefault();
-  //logic
-  };
-
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
       <CssBaseline />
@@ -65,7 +50,7 @@ const ForgotPasswordPage = () => {
           <h1 className="font-heading text-3xl md:text-5xl font-semibold">
             Forgot Password
           </h1>
-          <form className="mt-1" onSubmit={handleForgotPassword}>
+          <form className="mt-1">
             <TextField
               margin="normal"
               required
@@ -87,19 +72,12 @@ const ForgotPasswordPage = () => {
                 },
               }}
               variant="filled"
-              value={email}
-              onChange={handleEmailChange}
             />
             <button
               type="submit"
-              className={`cursor-pointer ${
-                loading
-                  ? 'cursor-default opacity-60'
-                  : 'hover:bg-white hover:text-primary'
-              } px-4 text-white my-4 w-full py-2 border-2 border-white font-heading font-semibold transition-all`}
-              disabled={loading}
+              className="cursor-pointer px-4 text-white my-4 w-full py-2 border-2 border-white font-heading hover:bg-white hover:text-primary font-semibold transition-all"
             >
-              {loading ? 'Sending Email...' : 'Reset Password'}
+              Reset Password
             </button>
           </form>
         </Box>
