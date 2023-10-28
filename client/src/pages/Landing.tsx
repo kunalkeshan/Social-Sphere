@@ -19,6 +19,6 @@ const Landing = () => {
 			<Footer />
 		</>
 	);
-};
+};	
 
 export default Landing;
